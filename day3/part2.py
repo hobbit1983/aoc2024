@@ -2,7 +2,6 @@ import re
 
 total = 0
 
-
 def find_match(test_str: str):
     regex = r"mul\((\d+),(\d+)\)"
     global total
@@ -14,12 +13,18 @@ def find_match(test_str: str):
 
 
 def remove_dont_statements(test_str: str) -> str:
+    # remove line breaks
+    regex = r"\n"
+    test_str = re.sub(regex," ",test_str,0,re.MULTILINE)
+    # remove sections between a don't() and do()
     regex = r"don't\(\).*?do\(\)"
-    return re.sub(regex,"",test_str,0,re.MULTILINE)
+    test_str = re.sub(regex," ",test_str,0,re.MULTILINE)
+    # remove trailing don't()
+    regex = r"don't\(\).*"
+    test_str = re.sub(regex," ",test_str,0,re.MULTILINE)
+    return test_str
 
 with open("input") as file:
     find_match(remove_dont_statements(file.read()))
         
 print(total)
-# 69402845 is too low
-# 106414362 too high
