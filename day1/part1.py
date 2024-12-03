@@ -1,4 +1,3 @@
-
 lista = []
 listb = []
 sum_of_distance = 0
@@ -17,4 +16,3 @@ for a in lista:
     sum_of_distance += abs(a - b)
 
 print(sum_of_distance)
-       
